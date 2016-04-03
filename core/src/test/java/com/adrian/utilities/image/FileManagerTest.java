@@ -17,22 +17,22 @@ public class FileManagerTest {
 
 	@Test
 	public void FileManagerTest_NoFilter_Correct_Number_Of_Files() throws IOException {
-		Path directory = Paths.get(".");
+		Path directory = Paths.get("./src/test/resources");
 		FileHandlingStrategy strategy = new CountingStrategy();
 		Predicate<? super Path> allFilesFilter =  (path) -> true; 
 		FileManager manager = new FileManager();
 		manager.process(directory, strategy, allFilesFilter);
 		
-		assertEquals(73, ((CountingStrategy)strategy).getCounter());
+		assertEquals(7, ((CountingStrategy)strategy).getCounter());
 
 	}
 	
 	@Test
 	public void FileManagerTest_HiddenFileFilter_Correct_Number_Of_Files() throws IOException {
-		Path directory = Paths.get(".");
+		Path directory = Paths.get("./src/test/resources");
 		
 		FileHandlingStrategy strategy = new CountingStrategy();
-		Predicate<? super Path> pomFilter =  (p) -> p.getFileName().toString().equals("pom.xml"); 
+		Predicate<? super Path> pomFilter =  (p) -> p.getFileName().toString().equals("foo"); 
 		FileManager manager = new FileManager();
 		manager.process(directory, strategy, pomFilter);
 		
