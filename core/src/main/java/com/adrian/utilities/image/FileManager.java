@@ -6,20 +6,15 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Predicate;
 
 import com.adrian.utilities.image.strategy.FileHandlingStrategy;
 
 public class FileManager {
-	final Path path;
-	final FileHandlingStrategy strategy;
-	
-	public FileManager(FileHandlingStrategy strategy, Path path) {
-		this.strategy = strategy;
-		this.path = path;
-	}
-	
-	public void process() throws IOException {
-		Files.walk(path, FileVisitOption.FOLLOW_LINKS).forEach(strategy::handleFile);
+		
+	public void process(Path path, FileHandlingStrategy strategy, Predicate<? super Path> filter) throws IOException {
+		Files.walk(path, FileVisitOption.FOLLOW_LINKS)
+		.filter(filter).forEach(strategy::handleFile);
 	}
 
 }
