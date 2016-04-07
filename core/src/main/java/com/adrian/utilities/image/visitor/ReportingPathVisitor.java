@@ -5,10 +5,14 @@ import java.util.List;
 
 public class ReportingPathVisitor implements PathVisitor {
 
+	final DuplicateStrategy duplicateStrategy;
+	
+	public ReportingPathVisitor(DuplicateStrategy duplicateStrategy) {
+		this.duplicateStrategy = duplicateStrategy;
+	}
+	
 	@Override
 	public void visit(List<Path> paths) {
-		paths.forEach(System.out::println);
-		
+			paths.forEach(duplicateStrategy.dedupe());
 	}
-
 }
