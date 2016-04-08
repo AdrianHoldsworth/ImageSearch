@@ -1,6 +1,7 @@
 package com.adrian.utilities.image.strategy;
 
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.function.Function;
 
 import com.adrian.utilities.hasher.Hasher;
 import com.adrian.utilities.image.visitor.PathVisitor;
@@ -17,7 +19,7 @@ import com.adrian.utilities.image.visitor.PathVisitor;
  * @author adrian
  *
  */
-public class MergeFileStrategy implements FileHandlingStrategy, ReportingStrategy {
+public class MergeFileStrategy implements FileHandlingStrategy, ReportingStrategy, Function<Path, Map<String, Path>> {
 
 	final Hasher hasher;
 	Map<String, List<Path>> map = new HashMap<>();
@@ -27,9 +29,12 @@ public class MergeFileStrategy implements FileHandlingStrategy, ReportingStrateg
 	
 	@Override
 	public void handleFile(Path path) {
+//		System.out.println(path);
 		String hash = null;
 		try {
-			hash = hasher.hash(path);
+			if ( !Files.isDirectory(path)) {
+				hash = hasher.hash(path);
+			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -51,5 +56,20 @@ public class MergeFileStrategy implements FileHandlingStrategy, ReportingStrateg
 		}
 	}
 
+	@Override
+	public Map<String, Path> apply(Path t) {
+		String hash = null;
+		Map <String, Path> map = new HashMap<>();
+		try {
+			hash =  hasher.hash(t);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		map.put(hash,t);
+		return map;
+	}
+	
 	
 }

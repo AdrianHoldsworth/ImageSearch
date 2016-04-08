@@ -13,6 +13,6 @@ public class ReportingPathVisitor implements PathVisitor {
 	
 	@Override
 	public void visit(List<Path> paths) {
-			paths.forEach(duplicateStrategy.dedupe());
+		duplicateStrategy.dedupe(paths);
 	}
 }
