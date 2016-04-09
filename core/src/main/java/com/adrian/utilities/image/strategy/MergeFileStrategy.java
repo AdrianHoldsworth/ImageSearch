@@ -12,6 +12,7 @@ import java.util.Set;
 import java.util.function.Function;
 
 import com.adrian.utilities.hasher.Hasher;
+import com.adrian.utilities.image.dto.Hash;
 import com.adrian.utilities.image.visitor.PathVisitor;
 /**
  * Provide an mechanism to store and aggregate hashes with O(1) complexity
@@ -19,7 +20,8 @@ import com.adrian.utilities.image.visitor.PathVisitor;
  * @author adrian
  *
  */
-public class MergeFileStrategy implements FileHandlingStrategy, ReportingStrategy, Function<Path, Map<String, Path>> {
+public class MergeFileStrategy implements FileHandlingStrategy, ReportingStrategy, Function<Path, Hash> {
+//public class MergeFileStrategy implements FileHandlingStrategy, ReportingStrategy, Function<Path, String> {
 
 	final Hasher hasher;
 	Map<String, List<Path>> map = new HashMap<>();
@@ -29,7 +31,6 @@ public class MergeFileStrategy implements FileHandlingStrategy, ReportingStrateg
 	
 	@Override
 	public void handleFile(Path path) {
-//		System.out.println(path);
 		String hash = null;
 		try {
 			if ( !Files.isDirectory(path)) {
@@ -57,9 +58,8 @@ public class MergeFileStrategy implements FileHandlingStrategy, ReportingStrateg
 	}
 
 	@Override
-	public Map<String, Path> apply(Path t) {
+	public Hash apply(Path t) {
 		String hash = null;
-		Map <String, Path> map = new HashMap<>();
 		try {
 			hash =  hasher.hash(t);
 		} catch (IOException e) {
@@ -67,9 +67,37 @@ public class MergeFileStrategy implements FileHandlingStrategy, ReportingStrateg
 			e.printStackTrace();
 		}
 		
-		map.put(hash,t);
-		return map;
+		
+		return new Hash(hash, t);
 	}
+//	@Override
+//	public Map<String, Path> apply(Path t) {
+//		String hash = null;
+//		Map <String, Path> map = new HashMap<>();
+//		try {
+//			hash =  hasher.hash(t);
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
+//		map.put(hash,t);
+//		return map;
+//	}
+//	@Override
+//	public String apply(Path t) {
+//		String hash = null;
+//		Map <String, Path> map = new HashMap<>();
+//		try {
+//			hash =  hasher.hash(t);
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
+//		map.put(hash,t);
+//		return hash;
+//	}
 	
 	
 }

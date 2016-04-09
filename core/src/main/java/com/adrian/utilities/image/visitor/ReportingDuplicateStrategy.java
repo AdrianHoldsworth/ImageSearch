@@ -7,7 +7,6 @@ public class ReportingDuplicateStrategy implements DuplicateStrategy {
 
 	@Override
 	public void dedupe(List<Path> paths) {
-		paths.forEach(System.out::println);
 		if (paths.size() <= 1) {
 			return;
 		} else {
@@ -19,7 +18,6 @@ public class ReportingDuplicateStrategy implements DuplicateStrategy {
 	}
 	
 	public void action(Path path) {
-		System.out.println(path);
 	}
 
 }
