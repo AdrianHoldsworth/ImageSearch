@@ -1,7 +1,16 @@
 package com.adrian.utilities.image.visitor;
-import java.nio.file.Path;
 import java.util.List;
-public interface PathVisitor {
 
-	public void visit(List<Path> paths);
+import com.adrian.utilities.image.deduplicator.DuplicateStrategy;
+import com.adrian.utilities.image.dto.Hash;
+public class PathVisitor {
+
+	final DuplicateStrategy duplicateStrategy;
+	
+	public PathVisitor(DuplicateStrategy duplicateStrategy) {
+		this.duplicateStrategy = duplicateStrategy;
+	}
+	public void visit(List<Hash> hashedPaths) {
+		duplicateStrategy.dedupe(hashedPaths);
+	}
 }

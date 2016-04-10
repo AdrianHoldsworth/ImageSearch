@@ -8,6 +8,9 @@ import java.util.List;
 import org.easymock.EasyMock;
 import org.junit.Test;
 
+import com.adrian.utilities.image.deduplicator.DuplicateStrategy;
+import com.adrian.utilities.image.dto.Hash;
+
 public class ReportingPathVisitorTest {
 	Path pathToFoo = Paths.get("./src/main/resources/directory/foo");
 	Path pathToBar = Paths.get("./src/main/resources/directory/bar");
@@ -16,10 +19,10 @@ public class ReportingPathVisitorTest {
 	@Test
 	public void DeduperIsCalledForAVisitedList() {
 		
-		List<Path> paths = new ArrayList<>();
-		paths.add(pathToBar);
+		List<Hash> paths = new ArrayList<>();
+		paths.add(new Hash("bar", pathToBar));
 		DuplicateStrategy mockStrategy = EasyMock.createMock(DuplicateStrategy.class);
-		ReportingPathVisitor visitor = new ReportingPathVisitor(mockStrategy);
+		PathVisitor visitor = new PathVisitor(mockStrategy);
 		
 		
 		mockStrategy.dedupe(EasyMock.isA(List.class));
