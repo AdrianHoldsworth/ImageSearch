@@ -14,11 +14,11 @@ import java.util.List;
 import org.easymock.EasyMock;
 import org.junit.Test;
 
+import com.adrian.utilities.file.hash.Hasher;
 import com.adrian.utilities.file.hash.HashingStrategy;
+import com.adrian.utilities.file.hash.Sha1Hasher;
 import com.adrian.utilities.file.hash.dto.Hash;
 import com.adrian.utilities.file.visitor.PathVisitor;
-import com.adrian.utilities.hash.Sha1Hasher;
-import com.adrian.utilities.hash.Hasher;
 
 
 public class HashingStrategyTest {

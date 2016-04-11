@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.function.Function;
 
 import com.adrian.utilities.file.hash.dto.Hash;
-import com.adrian.utilities.hash.Hasher;
 
 /**
  * Provide an mechanism to store and aggregate hashes with O(1) complexity

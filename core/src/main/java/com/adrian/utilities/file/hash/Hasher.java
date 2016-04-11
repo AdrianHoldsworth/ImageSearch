@@ -1,4 +1,4 @@
-package com.adrian.utilities.hash;
+package com.adrian.utilities.file.hash;
 
 import java.io.IOException;
 import java.nio.file.Path;
