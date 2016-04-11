@@ -1,4 +1,4 @@
-package com.adrian.utilities.hasher;
+package com.adrian.utilities.hash;
 
 import java.io.File;
 import java.io.FileInputStream;

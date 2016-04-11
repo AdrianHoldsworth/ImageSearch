@@ -1,4 +1,4 @@
-package com.adrian.utilities.image.strategy;
+package com.adrian.utilities.file.strategy;
 
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.expectLastCall;
@@ -14,10 +14,12 @@ import java.util.List;
 import org.easymock.EasyMock;
 import org.junit.Test;
 
-import com.adrian.utilities.hasher.Hasher;
-import com.adrian.utilities.hasher.Sha1Hasher;
-import com.adrian.utilities.image.dto.Hash;
-import com.adrian.utilities.image.visitor.PathVisitor;
+import com.adrian.utilities.file.hash.HashingStrategy;
+import com.adrian.utilities.file.hash.dto.Hash;
+import com.adrian.utilities.file.visitor.PathVisitor;
+import com.adrian.utilities.hash.Sha1Hasher;
+import com.adrian.utilities.hash.Hasher;
+
 
 public class HashingStrategyTest {
 

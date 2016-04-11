@@ -1,4 +1,4 @@
-package com.adrian.utilities.image.dto;
+package com.adrian.utilities.file.hash.dto;
 
 import java.nio.file.Path;
 

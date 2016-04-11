@@ -1,4 +1,4 @@
-package com.adrian.utilities.image.visitor;
+package com.adrian.utilities.file.visitor;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -8,8 +8,10 @@ import java.util.List;
 import org.easymock.EasyMock;
 import org.junit.Test;
 
-import com.adrian.utilities.image.deduplicator.DuplicateStrategy;
-import com.adrian.utilities.image.dto.Hash;
+import com.adrian.utilities.file.deduplicator.DuplicateStrategy;
+import com.adrian.utilities.file.hash.dto.Hash;
+import com.adrian.utilities.file.visitor.PathVisitor;
+
 
 public class ReportingPathVisitorTest {
 	Path pathToFoo = Paths.get("./src/main/resources/directory/foo");

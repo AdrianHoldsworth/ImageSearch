@@ -1,4 +1,4 @@
-package com.adrian.utilities.image.strategy;
+package com.adrian.utilities.file.hash;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
-import com.adrian.utilities.hasher.Hasher;
-import com.adrian.utilities.image.dto.Hash;
+import com.adrian.utilities.file.hash.dto.Hash;
+import com.adrian.utilities.hash.Hasher;
 
 /**
  * Provide an mechanism to store and aggregate hashes with O(1) complexity

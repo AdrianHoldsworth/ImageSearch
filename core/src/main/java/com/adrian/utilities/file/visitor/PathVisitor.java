@@ -1,8 +1,8 @@
-package com.adrian.utilities.image.visitor;
+package com.adrian.utilities.file.visitor;
 import java.util.List;
 
-import com.adrian.utilities.image.deduplicator.DuplicateStrategy;
-import com.adrian.utilities.image.dto.Hash;
+import com.adrian.utilities.file.deduplicator.DuplicateStrategy;
+import com.adrian.utilities.file.hash.dto.Hash;
 public class PathVisitor {
 
 	final DuplicateStrategy duplicateStrategy;

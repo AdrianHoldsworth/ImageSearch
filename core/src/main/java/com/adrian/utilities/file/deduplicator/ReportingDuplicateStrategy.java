@@ -1,9 +1,9 @@
-package com.adrian.utilities.image.deduplicator;
+package com.adrian.utilities.file.deduplicator;
 
 import java.nio.file.Path;
 import java.util.List;
 
-import com.adrian.utilities.image.dto.Hash;
+import com.adrian.utilities.file.hash.dto.Hash;
 
 public class ReportingDuplicateStrategy implements DuplicateStrategy {
 

@@ -1,4 +1,4 @@
-package com.adrian.utilities.image;
+package com.adrian.utilities.file;
 
 import java.io.IOException;
 import java.nio.file.FileVisitOption;
@@ -9,16 +9,17 @@ import java.util.Map;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-import com.adrian.utilities.hasher.Sha1Hasher;
-import com.adrian.utilities.image.deduplicator.DuplicateStrategy;
-import com.adrian.utilities.image.dto.Hash;
-import com.adrian.utilities.image.strategy.HashingStrategy;
-import com.adrian.utilities.image.visitor.PathVisitor;
+import com.adrian.utilities.file.hash.HashingStrategy;
+import com.adrian.utilities.file.hash.dto.Hash;
+import com.adrian.utilities.file.visitor.PathVisitor;
+import com.adrian.utilities.hash.Sha1Hasher;
 
-public abstract class FileManager {
+public class FileManager {
 	private final HashingStrategy hashingStrategy;
+	private final PathVisitor pathVisitor;
 	
-	public FileManager() {
+	public FileManager(PathVisitor pathVisitor) {
+		this.pathVisitor = pathVisitor;
 		hashingStrategy = new HashingStrategy(new Sha1Hasher());
 	}
 	
@@ -28,10 +29,14 @@ public abstract class FileManager {
 				.collect(Collectors.groupingBy(Hash::getHash))
 				.entrySet().stream().filter(m -> m.getValue().size() > 1)
 				.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
-		map.entrySet().stream().forEach(f -> getPathVisitor().visit(f.getValue()));
+		map.entrySet().stream().forEach(f -> pathVisitor.visit(f.getValue()));
 
 	}
 	
-	public abstract PathVisitor getPathVisitor();
+	public static void main(String[] args) throws IOException {
+//		new FileManager().processDuplicates(Paths.get("./src/test/resources/directory/"),
+//											(p)-> !Files.isDirectory(p));
+		System.out.println("end");
+	}
 
 }

@@ -10,6 +10,9 @@ import static org.hamcrest.Matchers.*;
 
 import org.junit.Test;
 
+import com.adrian.utilities.hash.Hasher;
+import com.adrian.utilities.hash.Sha1Hasher;
+
 public class ShaHasherTest {
 
 	@Test
