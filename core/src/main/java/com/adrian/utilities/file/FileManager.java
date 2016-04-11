@@ -4,11 +4,14 @@ import java.io.IOException;
 import java.nio.file.FileVisitOption;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import com.adrian.utilities.file.deduplicator.DuplicateStrategy;
+import com.adrian.utilities.file.deduplicator.ReportingDuplicateStrategy;
 import com.adrian.utilities.file.hash.HashingStrategy;
 import com.adrian.utilities.file.hash.Sha1Hasher;
 import com.adrian.utilities.file.hash.dto.Hash;
@@ -34,9 +37,7 @@ public class FileManager {
 	}
 	
 	public static void main(String[] args) throws IOException {
-//		new FileManager().processDuplicates(Paths.get("./src/test/resources/directory/"),
-//											(p)-> !Files.isDirectory(p));
-		System.out.println("end");
+		new FileManager(new PathVisitor(new ReportingDuplicateStrategy())).processDuplicates(Paths.get("./src/test/resources/directory/"),
+											(p)-> !Files.isDirectory(p));
 	}
-
 }
