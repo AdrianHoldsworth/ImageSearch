@@ -5,6 +5,7 @@ import static org.easymock.EasyMock.expectLastCall;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -45,6 +46,28 @@ public class HashingStrategyTest {
 		
 //		assertThat(strategy.map.get("foo").size(), equalTo(2));
 //		assertThat(strategy.map.get("bar").size(), equalTo(1));
+		
+	}
+	
+	@Test (expected=RuntimeException.class)
+	public void testMergeAggregatesFile_ThrowsException() throws IOException {
+		Hasher mockHasher = EasyMock.createMock(Sha1Hasher.class);
+		PathVisitor mockVisitor = EasyMock.createMock(PathVisitor.class);
+		Path pathToFoo = Paths.get("./src/main/resources/directory/foo");
+		Path pathToBar = Paths.get("./src/main/resources/directory/bar");
+		Path pathToSubFoo = Paths.get("./src/main/resources/directory/sub/foo");
+		
+		HashingStrategy strategy = new HashingStrategy(mockHasher);
+		
+		expect(mockHasher.hash(pathToFoo)).andReturn("foo");
+		expect(mockHasher.hash(pathToBar)).andReturn("bar");
+		expect(mockHasher.hash(pathToSubFoo)).andThrow(new FileNotFoundException());
+		
+		EasyMock.replay(mockHasher);
+		strategy.apply(pathToFoo);
+		strategy.apply(pathToBar);
+		strategy.apply(pathToSubFoo);
+		EasyMock.verify(mockHasher);
 		
 	}
 	
